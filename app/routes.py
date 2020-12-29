@@ -117,7 +117,7 @@ def edit_profile():
     profile_id = request.args.get("id", current_user.id, type=int)
 
     if current_user.id != profile_id and current_user.username != 'admin':
-        return redirect(url_for('edit-profile', id=current_user.id))
+        return redirect(url_for('edit_profile', id=current_user.id))
 
     u = User.query.filter(User.id == profile_id).first()
 
