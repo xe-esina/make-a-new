@@ -226,6 +226,9 @@ def blog():
         if posts.has_prev else None
 
     for p in posts.items:
+        utc = pytz.timezone('UTC')
+        msk = pytz.timezone('Europe/Moscow')
+        p.timestamp = utc.localize(p.timestamp).astimezone(msk)
         p.timestamp = p.timestamp.strftime("%d-%m-%Y %H:%M")
 
     return render_template('blog.html',
