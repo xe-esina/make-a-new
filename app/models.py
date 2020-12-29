@@ -32,7 +32,6 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
     posts = db.relationship('Post', backref='author', lazy='dynamic')
-    comments = db.relationship('Comment', backref='author', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
@@ -60,16 +59,3 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<Post {}>'.format(self.text)
-
-
-class Comment(db.Model):
-    __tablename__ = 'comments'
-    id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(200), nullable=False)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.datetime.utcnow)
-
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
-
-    def __repr__(self):
-        return '<Comment {}>'.format(self.body)

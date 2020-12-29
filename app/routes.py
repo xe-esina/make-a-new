@@ -2,11 +2,10 @@ from flask import render_template
 from app import app
 
 from flask import render_template, flash, redirect, url_for, request
-from sqlalchemy import extract, func
 from app import app, db
-from app.models import User, Post, Comment, MONTHS
+from app.models import User, Post
 from .forms import LoginForm, RegisterForm, EditProfileForm, CreatePostForm
-from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
+from flask_login import login_required, login_user, logout_user, current_user
 import datetime
 import time
 import pytz
