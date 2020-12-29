@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% import 'bootstrap/form.html' as wtf %}
+
+{% block app_content %}
+<h1>Make A New</h1>
+<br>
+<p>Войдите, чтобы начать писать свои новости и читать чужие</p>
+<div class="row">
+            <div class="col-md-3">
+                {{ wtf.render_form(form) }}
+            </div>
+</div>
+<br>
+<p>Некуда войти? <a href="{{ url_for('register') }}">Зарегистрируйтесь</a>.</p>
+{% endblock %}

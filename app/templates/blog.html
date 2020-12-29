@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block menu %}
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('blog') }}">Блог</a></li>
+    <li class="nav-item"><a class="nav-link" href="{{ url_for('news') }}">Новости</a></li>
+{% endblock %}
+
+{% block app_content %}
+    <h1 class="mt-3">Блог</h1>
+    <a class="btn btn-primary mt-3" href="{{ url_for('create_post') }}">Добавить новость</a>
+
+    {% for p in posts %}
+        <div class="card mt-3">
+            <div class="card-body">
+                <h3 class="card-title">{{ p.headline }}</h3>
+                <p class="card-text">{{ p.text }}</p>
+            </div>
+            <div class="card-footer">
+                <em class="text-muted text-monospace">{{ p.timestamp }} (MSK) by </em>
+                <img src="{{ p.author.avatar(16) }}">
+                <a href="{{ url_for('user', username=p.author.username) }}">{{ p.author.username }}</a>
+            </div>
+        </div>
+    {% endfor %}
+
+    <ul class="pagination mt-3">
+
+        <li class="page-item {% if not prev_url %}disabled{% endif %}">
+          <a class="page-link" href="{{ prev_url }}" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li class="page-item {% if not next_url %}disabled{% endif %}">
+          <a class="page-link" href="{{ next_url }}" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+    </ul>
+{% endblock %}
