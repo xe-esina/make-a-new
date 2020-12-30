@@ -16,7 +16,7 @@
                 <p class="card-text">{{ p.text }}</p>
             </div>
             <div class="card-footer">
-                <em class="text-muted text-monospace">{{ p.timestamp }} (MSK) by </em>
+                <em class="text-muted text-monospace">{{ p.time }} (MSK) by </em>
                 <img src="{{ p.author.avatar(16) }}">
                 <a href="{{ url_for('user', username=p.author.username) }}">{{ p.author.username }}</a>
             </div>

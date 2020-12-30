@@ -156,7 +156,7 @@ def admin():
     if delete_id > -1:
         u = User.query.filter(User.id == delete_id).first()
 
-        for t in u.transactions.all():
+        for t in u.posts.all():
             db.session.delete(t)
 
         db.session.delete(u)
@@ -236,8 +236,8 @@ def blog():
     for p in posts.items:
         utc = pytz.timezone('UTC')
         msk = pytz.timezone('Europe/Moscow')
-        p.timestamp = utc.localize(p.timestamp).astimezone(msk)
-        p.timestamp = p.timestamp.strftime("%d-%m-%Y %H:%M")
+        p.time = utc.localize(p.timestamp).astimezone(msk)
+        p.time = p.time.strftime("%d-%m-%Y %H:%M")
 
     return render_template('blog.html',
                            title='Блог',
